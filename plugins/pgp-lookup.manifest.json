@@ -1,0 +1,90 @@
+{
+  "identifier": "run.vineyard.pluginpacks.pgp_lookup",
+  "content_type": "vineyard:pluginpack",
+  "name": "PGP Key Lookup",
+  "version": "1.0.0",
+  "description": "Looks up OpenPGP public keys published for each selected Email Address across public key directories (keys.openpgp.org, keyserver.ubuntu.com, pgpkeys.eu, keys.mailvelope.com) and adds PGP Key nodes linked back to the email. Desktop only: three of the four directories answer no CORS headers and need the desktop probe channel.",
+  "author": {
+    "name": "vineyard-run",
+    "url": "https://github.com/vineyard-run"
+  },
+  "license": "Apache-2.0",
+  "icon": "key",
+  "platforms": {
+    "primary": "desktop",
+    "web": {
+      "runtime": "sandbox-js",
+      "entry": "dist/pack.mjs"
+    },
+    "desktop": {
+      "runtime": "sandbox-js",
+      "entry": "dist/pack.mjs",
+      "min_app_version": "0.1.0"
+    }
+  },
+  "plugins": [
+    {
+      "identifier": "run.vineyard.plugins.pgp_lookup",
+      "content_type": "vineyard:plugin",
+      "name": "PGP Key Lookup",
+      "version": "1.0.0",
+      "description": "For each selected Email Address, queries keys.openpgp.org (VKS by-email), keyserver.ubuntu.com, pgpkeys.eu, and keys.mailvelope.com (HKP by-email) for public OpenPGP keys bound to that address, then adds one PGP Key node per distinct fingerprint with fingerprint, key id, algorithm, key size, creation/expiration dates, User IDs, revocation state, the armored key, and the sources it came from. Each key is linked to the emails it was found for with a 'key bound to' edge. Exact by-email lookups only — no index search, no enumeration.",
+      "icon": "key",
+      "platforms": {
+        "primary": "desktop",
+        "web": {
+          "runtime": "sandbox-js",
+          "entry": "dist/pack.mjs"
+        },
+        "desktop": {
+          "runtime": "sandbox-js",
+          "entry": "dist/pack.mjs",
+          "min_app_version": "0.1.0"
+        }
+      },
+      "io": {
+        "consumes": [
+          {
+            "typepack": "run.vineyard.typepacks.identity",
+            "category": "identity",
+            "name": "email_address"
+          }
+        ],
+        "produces": [
+          {
+            "typepack": "run.vineyard.typepacks.identity",
+            "category": "identity",
+            "name": "pgp_key"
+          }
+        ]
+      },
+      "scopes": {
+        "graph": [
+          "node:read",
+          "node:create",
+          "edge:create"
+        ],
+        "network": [
+          {
+            "endpoint": "https://keys.openpgp.org/vks/v1/",
+            "methods": [
+              "GET"
+            ],
+            "purpose": "Exact by-email lookup on keys.openpgp.org (the only keyserver answering CORS)."
+          }
+        ],
+        "web_probe": {
+          "purpose": "Exact by-email HKP lookups on keyserver.ubuntu.com, pgpkeys.eu, and keys.mailvelope.com — servers that answer no CORS headers."
+        }
+      },
+      "lifecycle": {
+        "persistence": "opt-in",
+        "controls": [
+          "progress",
+          "cancel"
+        ],
+        "progress": "determinate"
+      }
+    }
+  ]
+}
