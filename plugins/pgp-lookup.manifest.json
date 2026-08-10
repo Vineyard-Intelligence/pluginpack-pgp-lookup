@@ -5,7 +5,7 @@
   "version": "1.0.0",
   "description": "Looks up OpenPGP public keys published for each selected Email Address across public key directories (keys.openpgp.org, keyserver.ubuntu.com, pgpkeys.eu, keys.mailvelope.com) and adds PGP Key nodes linked back to the email. Desktop only: three of the four directories answer no CORS headers and need the desktop probe channel.",
   "author": {
-    "name": "vineyard-run",
+    "name": "VINEYARD",
     "url": "https://github.com/vineyard-run"
   },
   "license": "Apache-2.0",
