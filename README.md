@@ -6,24 +6,21 @@ linked back to the email.
 
 ## Sources (v1)
 
-| Directory | Protocol | Channel |
-| --- | --- | --- |
-| keys.openpgp.org | VKS `by-email` | `ctx.net.fetch` (CORS-enabled, network allowlist) |
-| keyserver.ubuntu.com | HKP `op=get&search=<email>` | `ctx.net.probe` (desktop) |
-| pgpkeys.eu | HKP `op=get&search=<email>` | `ctx.net.probe` (desktop) |
-| keys.mailvelope.com | HKP `op=get&search=<email>` | `ctx.net.probe` (desktop) |
+| Directory | Protocol |
+| --- | --- |
+| keys.openpgp.org | VKS `by-email` |
+| keyserver.ubuntu.com | HKP `op=get&search=<email>` |
+| pgpkeys.eu | HKP `op=get&search=<email>` |
+| keys.mailvelope.com | HKP `op=get&search=<email>` |
 
 Every request is an **exact by-email lookup** — no `op=index` search, no enumeration, no bulk
-harvesting. WKD is not in v1: it serves binary certificates, and the desktop probe channel carries
-bodies as UTF-8 text (adding WKD needs a binary/base64 option on that channel first).
+harvesting. WKD is not supported in v1.
 
 ## Desktop only
 
-Three of the four directories answer no CORS headers, so those requests go through the desktop
-shell's `web_probe` capability — the same anonymous, SSRF-guarded, main-process channel the
-WhatsMyName pack uses. In a browser the plugin is present but inert: it detects the missing
-capability and tells you to open the project in the desktop app rather than returning a misleading
-empty result.
+Three of the four directories send no CORS headers, so the browser cannot read them. In a browser
+the plugin tells you to open the project in the desktop app rather than returning a misleading empty
+result.
 
 ## What gets added to the graph
 
