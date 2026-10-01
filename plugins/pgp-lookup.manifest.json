@@ -2,8 +2,8 @@
   "identifier": "run.vineyard.pluginpacks.pgp_lookup",
   "content_type": "vineyard:pluginpack",
   "name": "PGP Key Lookup",
-  "version": "1.0.0",
-  "description": "Looks up OpenPGP public keys published for each selected Email Address across public key directories (keys.openpgp.org, keyserver.ubuntu.com, pgpkeys.eu, keys.mailvelope.com) and adds PGP Key nodes linked back to the email. Desktop only: three of the four directories answer no CORS headers and need the desktop probe channel.",
+  "version": "1.0.1",
+  "description": "Finds OpenPGP public keys published for email addresses on public key directories. Desktop only.",
   "author": {
     "name": "VINEYARD",
     "url": "https://github.com/Vineyard-Intelligence"
@@ -27,8 +27,8 @@
       "identifier": "run.vineyard.plugins.pgp_lookup",
       "content_type": "vineyard:plugin",
       "name": "PGP Key Lookup",
-      "version": "1.0.0",
-      "description": "For each selected Email Address, queries keys.openpgp.org (VKS by-email), keyserver.ubuntu.com, pgpkeys.eu, and keys.mailvelope.com (HKP by-email) for public OpenPGP keys bound to that address, then adds one PGP Key node per distinct fingerprint with fingerprint, key id, algorithm, key size, creation/expiration dates, User IDs, revocation state, the armored key, and the sources it came from. Each key is linked to the emails it was found for with a 'key bound to' edge. Exact by-email lookups only — no index search, no enumeration.",
+      "version": "1.0.1",
+      "description": "Looks up OpenPGP public keys published for each selected Email Address on keys.openpgp.org, keyserver.ubuntu.com, pgpkeys.eu and keys.mailvelope.com. Creates one PGP Key node per distinct fingerprint (key ID, algorithm, key size, creation/expiration, User IDs, revocation, armored key, sources), linked \"key bound to\" to each email it was found for. Desktop only.",
       "icon": "key",
       "platforms": {
         "primary": "desktop",
