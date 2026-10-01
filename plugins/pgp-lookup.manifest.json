@@ -2,7 +2,7 @@
   "identifier": "run.vineyard.pluginpacks.pgp_lookup",
   "content_type": "vineyard:pluginpack",
   "name": "PGP Key Lookup",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Finds OpenPGP public keys published for email addresses on public key directories. Desktop only.",
   "author": {
     "name": "VINEYARD",
@@ -27,7 +27,7 @@
       "identifier": "run.vineyard.plugins.pgp_lookup",
       "content_type": "vineyard:plugin",
       "name": "PGP Key Lookup",
-      "version": "1.0.1",
+      "version": "1.0.2",
       "description": "Looks up OpenPGP public keys published for each selected Email Address on keys.openpgp.org, keyserver.ubuntu.com, pgpkeys.eu and keys.mailvelope.com. Creates one PGP Key node per distinct fingerprint (key ID, algorithm, key size, creation/expiration, User IDs, revocation, armored key, sources), linked \"key bound to\" to each email it was found for. Desktop only.",
       "icon": "key",
       "platforms": {
@@ -70,11 +70,11 @@
             "methods": [
               "GET"
             ],
-            "purpose": "Exact by-email lookup on keys.openpgp.org (the only keyserver answering CORS)."
+            "purpose": "Look up keys published for each selected email address on keys.openpgp.org."
           }
         ],
         "web_probe": {
-          "purpose": "Exact by-email HKP lookups on keyserver.ubuntu.com, pgpkeys.eu, and keys.mailvelope.com — servers that answer no CORS headers."
+          "purpose": "Look up keys published for each selected email address on keyserver.ubuntu.com, pgpkeys.eu and keys.mailvelope.com."
         }
       },
       "lifecycle": {
