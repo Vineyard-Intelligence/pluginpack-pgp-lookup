@@ -2,8 +2,8 @@
   "identifier": "run.vineyard.pluginpacks.pgp_lookup",
   "content_type": "vineyard:pluginpack",
   "name": "PGP Key Lookup",
-  "version": "1.0.2",
-  "description": "Finds OpenPGP public keys published for email addresses on public key directories. Desktop only.",
+  "version": "1.1.0",
+  "description": "Finds OpenPGP public keys on public key directories by email address or key fingerprint. Desktop only.",
   "author": {
     "name": "VINEYARD",
     "url": "https://github.com/Vineyard-Intelligence"
@@ -27,8 +27,8 @@
       "identifier": "run.vineyard.plugins.pgp_lookup",
       "content_type": "vineyard:plugin",
       "name": "PGP Key Lookup",
-      "version": "1.0.2",
-      "description": "Looks up OpenPGP public keys published for each selected Email Address on keys.openpgp.org, keyserver.ubuntu.com, pgpkeys.eu and keys.mailvelope.com. Creates one PGP Key node per distinct fingerprint (key ID, algorithm, key size, creation/expiration, User IDs, revocation, armored key, sources), linked \"key bound to\" to each email it was found for. Desktop only.",
+      "version": "1.1.0",
+      "description": "Looks up OpenPGP public keys on keys.openpgp.org, keyserver.ubuntu.com, pgpkeys.eu and keys.mailvelope.com: by address for each selected Email Address, by fingerprint for each selected PGP Key. Creates one PGP Key node per distinct fingerprint (key ID, algorithm, key size, creation/expiration, User IDs, revocation, armored key, sources, and user_id_sources: per User ID, the directories that served it and whether one of them verifies addresses), and an Email Address node for every address in its User IDs, linked \"key bound to\". Desktop only.",
       "icon": "key",
       "platforms": {
         "primary": "desktop",
@@ -48,6 +48,11 @@
             "typepack": "run.vineyard.typepacks.identity",
             "category": "identity",
             "name": "email_address"
+          },
+          {
+            "typepack": "run.vineyard.typepacks.identity",
+            "category": "identity",
+            "name": "pgp_key"
           }
         ],
         "produces": [
@@ -55,6 +60,11 @@
             "typepack": "run.vineyard.typepacks.identity",
             "category": "identity",
             "name": "pgp_key"
+          },
+          {
+            "typepack": "run.vineyard.typepacks.identity",
+            "category": "identity",
+            "name": "email_address"
           }
         ]
       },
@@ -70,11 +80,11 @@
             "methods": [
               "GET"
             ],
-            "purpose": "Look up keys published for each selected email address on keys.openpgp.org."
+            "purpose": "Look up keys by each selected email address or key fingerprint on keys.openpgp.org."
           }
         ],
         "web_probe": {
-          "purpose": "Look up keys published for each selected email address on keyserver.ubuntu.com, pgpkeys.eu and keys.mailvelope.com."
+          "purpose": "Look up keys by each selected email address or key fingerprint on keyserver.ubuntu.com, pgpkeys.eu and keys.mailvelope.com."
         }
       },
       "lifecycle": {
