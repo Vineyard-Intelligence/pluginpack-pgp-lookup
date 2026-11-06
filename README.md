@@ -41,6 +41,16 @@ result.
 
 Requires the `identity.pgp_key` type (Identity type pack ≥ 1.2.0).
 
+## Building from source
+
+`src/` is the source of `dist/pack.mjs`. The build pins esbuild, so the published bundle can be
+checked against the source:
+
+```bash
+node build.mjs
+git diff --exit-code dist/pack.mjs
+```
+
 ## License
 
 Apache-2.0
