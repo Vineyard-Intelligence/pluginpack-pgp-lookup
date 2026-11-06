@@ -426,7 +426,7 @@ export const pgpLookup = definePlugin({
         identifier: 'run.vineyard.plugins.pgp_lookup',
         content_type: 'vineyard:plugin',
         name: 'PGP Key Lookup',
-        version: '1.1.0',
+        version: '1.1.1',
         description:
             'Looks up OpenPGP public keys on keys.openpgp.org, keyserver.ubuntu.com, pgpkeys.eu and keys.mailvelope.com: by address for each selected Email Address, by fingerprint for each selected PGP Key. Creates one PGP Key node per distinct fingerprint (key ID, algorithm, key size, creation/expiration, User IDs, revocation, armored key, sources, and user_id_sources: per User ID, the directories that served it and whether one of them verifies addresses), and an Email Address node for every address in its User IDs, linked "key bound to". Desktop only.',
         author: { name: 'VINEYARD', url: 'https://vineyard.run' },
